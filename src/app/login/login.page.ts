@@ -1,9 +1,9 @@
 //*******************************************************************************/
 //*                                   SecGar                                    */
 //*******************************************************************************/
-//* Proyecto: Login movil
-//* Desarrollador: Bastian Lisboa (BAS)
-//* Fecha: 30-08-2024
+//* Proyecto: Login movil                                                       */
+//* Desarrollador: Bastian Lisboa (BAS)                                         */
+//* Fecha: 30-08-2024                                                           */
 //*******************************************************************************/
 //* MODIFICACIONES                                                              */
 //*******************************************************************************/
@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
       const claveCorrespondiente = this.contraseñas[indiceUsuario];
       if (claveIngresada === claveCorrespondiente) {
         this.Alerta_error = false;
-        this.router.navigate(['principal']);
+        this.router.navigate(['folder']);
       } else {
         this.Alerta_error = true;
       }
