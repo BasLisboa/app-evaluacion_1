@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
   cli_usr: string = '';
   cli_psw: string = '';
-  visibleWarning: boolean = false;
+  Alerta_error: boolean = false;
   visibleSpinner: boolean = false;
 
   constructor(public fb: FormBuilder,private router: Router) {
@@ -35,11 +35,11 @@ export class LoginPage implements OnInit {
 
   ingresar(){
     if(this.cli_usr == "BAS" && this.cli_psw == "123"){
-      this.visibleWarning = true;
+      this.Alerta_error = true;
       this.router.navigate(['principal'])
-      this.visibleWarning = true;
+      this.Alerta_error = true;
     }else {
-      this.visibleWarning = true;
+      this.Alerta_error = true;
     }
   }
 
