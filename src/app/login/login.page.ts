@@ -1,3 +1,21 @@
+//*******************************************************************************/
+//*                                   SecGar                                    */
+//*******************************************************************************/
+//* Proyecto: Login movil
+//* Desarrollador: Bastian Lisboa (BAS)
+//* Fecha: 30-08-2024
+//*******************************************************************************/
+//* MODIFICACIONES                                                              */
+//*******************************************************************************/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 30-08-2024                                                           */
+//* Descripcion: Creacion de login                                              */
+//*-----------------------------------------------------------------------------*/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 31-08-2024                                                           */
+//* Descripcion: Modificacion a logica login (BAS01)                            */
+//*******************************************************************************/
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -15,6 +33,8 @@ import {
 export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
+  usuarios: string[] = ['BAS', 'DAN', 'ADM'];
+  contraseñas: string[] = ['123', '456', '789'];
   cli_usr: string = '';
   cli_psw: string = '';
   Alerta_error: boolean = false;
@@ -34,13 +54,24 @@ export class LoginPage implements OnInit {
 
 
   ingresar(){
-    if(this.cli_usr == "BAS" && this.cli_psw == "123"){
-      this.Alerta_error = true;
-      this.router.navigate(['principal'])
-      this.Alerta_error = true;
-    }else {
+    const usuarioIngresado = this.cli_usr;
+    const claveIngresada = this.cli_psw;
+
+    const indiceUsuario = this.usuarios.indexOf(usuarioIngresado);
+    
+    //Validaciones para clave y contraseña INI-BAS01
+    if (indiceUsuario !== -1) { 
+      const claveCorrespondiente = this.contraseñas[indiceUsuario];
+      if (claveIngresada === claveCorrespondiente) {
+        this.Alerta_error = false;
+        this.router.navigate(['principal']);
+      } else {
+        this.Alerta_error = true;
+      }
+    } else {
       this.Alerta_error = true;
     }
   }
+  //FIN-BAS01
 
 }
