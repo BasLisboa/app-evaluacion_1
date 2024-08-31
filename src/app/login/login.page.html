@@ -1,13 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+</ion-header>
+<ion-item  class="item-warning" *ngIf="visibleWarning" >Credenciales invalidas</ion-item>
+<ion-content>
+    <ion-card style="margin: 3vh;">
+        <ion-card-header>
+            <ion-row>
+                <ion-col>
+                    <h1 style="text-align: center;">Iniciar Sesión</h1>
+                </ion-col>
+            </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+            <form [formGroup]="formularioLogin">
+                <ion-item>
+                    <ion-icon name="person-outline" style="margin-right: 0.5vh;"></ion-icon>
+                    <ion-input [(ngModel)]="cli_usr" formControlName="nombre" required placeholder="Usuario"></ion-input>
+                </ion-item>
+                <br />
+                <ion-item>
+                    <ion-icon name="lock-closed-outline" style="margin-right: 0.5vh;"></ion-icon>
+                    <ion-input [(ngModel)]="cli_psw" formControlName="password" type="password" required placeholder="Contraseña"></ion-input>
+                </ion-item>
+            </form>
+            <br>
+            <ion-button (click)="ingresar()">
+                <ion-spinner name="circular" *ngIf="visibleSpinner" class="ion-margin-end"></ion-spinner>
+                Ingresar
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
