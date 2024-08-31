@@ -1,9 +1,26 @@
+<!--//*******************************************************************************/
+    //*                                   SecGar                                    */
+    //*******************************************************************************/
+    //* Proyecto: Login WEB movil                                                   */
+    //* Desarrollador: Bastian Lisboa (BAS)                                         */
+    //* Fecha: 30-08-2024                                                           */
+    //*******************************************************************************/
+    //* MODIFICACIONES                                                              */
+    //*******************************************************************************/
+    //* Desarrollador: Bastian Lisboa                                               */
+    //* Fecha: 30-08-2024                                                           */
+    //* Descripcion: Creacion de WEB                                                */
+    //*-----------------------------------------------------------------------------*/
+    //*******************************************************************************/-->
 <ion-header>
 
 </ion-header>
+
+
 <ion-item  class="item-warning" *ngIf="Alerta_error" >Credenciales invalidas</ion-item>
-<ion-content>
-    <ion-card style="margin: 3vh;">
+<ion-content class="more_login">
+    <link rel="stylesheet" href="/assets/css/login.styles.css">
+    <ion-card class="card_login">
         <ion-card-header>
             <ion-row>
                 <ion-col>
@@ -24,7 +41,9 @@
                 </ion-item>
             </form>
             <br>
-            <ion-button (click)="ingresar()">
+            <ion-button fill="clear" class="cambio_psw">Cambiar contraseña</ion-button>
+    
+            <ion-button class="boton_ingresar" (click)="ingresar()" fill="clear">
                 <ion-spinner name="circular" *ngIf="visibleSpinner" class="ion-margin-end"></ion-spinner>
                 Ingresar
             </ion-button>
