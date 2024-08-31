@@ -3,7 +3,7 @@
 }
 
 .card_login{
-    background-color: rgba(24, 24, 24, 0.788);
+    background-color: rgba(0, 0, 0, 0.788);
     height: 60%;
     width: 80%;
     margin: 10%;
@@ -29,3 +29,4 @@ h1{
     color: white;
     font-size:75%;
 }
+
