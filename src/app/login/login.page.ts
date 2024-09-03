@@ -18,12 +18,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms'
+import { SharedDataService } from '../shared-data.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -33,35 +29,37 @@ import {
 export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
-  usuarios: string[] = ['BAS', 'DAN', 'ADM'];
-  contraseñas: string[] = ['123', '456', '789'];
   cli_usr: string = '';
   cli_psw: string = '';
   Alerta_error: boolean = false;
   visibleSpinner: boolean = false;
 
-  constructor(public fb: FormBuilder,private router: Router) {
-
+  constructor(
+    public fb: FormBuilder,
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) {
     this.formularioLogin = this.fb.group({
-      'nombre' : new FormControl("",Validators.required),
-      'password' : new FormControl("",Validators.required)
-    })
-
-   }
-
-  ngOnInit() {
+      'nombre': new FormControl("", Validators.required),
+      'password': new FormControl("", Validators.required)
+    });
   }
 
+  ngOnInit() {}
 
-  ingresar(){
+  ingresar() {
     const usuarioIngresado = this.cli_usr;
     const claveIngresada = this.cli_psw;
 
-    const indiceUsuario = this.usuarios.indexOf(usuarioIngresado);
-    
-    //Validaciones para clave y contraseña INI-BAS01
+    // Obtener los arrays desde el servicio
+    const usuarios = this.sharedDataService.getUsuarios();
+    const contrasenas = this.sharedDataService.getContrasenas();
+
+    const indiceUsuario = usuarios.indexOf(usuarioIngresado);
+
+    // Validaciones para clave y usuario INI-BAS01
     if (indiceUsuario !== -1) { 
-      const claveCorrespondiente = this.contraseñas[indiceUsuario];
+      const claveCorrespondiente = contrasenas[indiceUsuario];
       if (claveIngresada === claveCorrespondiente) {
         this.Alerta_error = false;
         this.router.navigate(['folder']);
@@ -72,6 +70,9 @@ export class LoginPage implements OnInit {
       this.Alerta_error = true;
     }
   }
-  //FIN-BAS01
+  // FIN-BAS01
 
+  cambio_psw() {
+    this.router.navigate(['cambio-psw']);
+  }
 }
