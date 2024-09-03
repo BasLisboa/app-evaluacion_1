@@ -101,8 +101,9 @@ export class CambioPswPage implements OnInit {
       if(claveIngresada2.length > 0 && claveIngresada3.length > 0){
 
         //VALIDA LARGO MINIMO
-        if (claveIngresada2.length > 3 && claveIngresada3.length > 3) {
+        if (claveIngresada2.length >= 3 && claveIngresada3.length >= 3) {
           this.flag_psw = true;
+          this.Alerta_error_psw3 = false;
         } else {
           this.Alerta_error_psw3 = true;
           this.flag_psw = false;
@@ -123,6 +124,7 @@ export class CambioPswPage implements OnInit {
           this.Alerta_error_psw1 = true;
         } else {
           this.flag_psw = true;
+          this.Alerta_error_psw1 = false;
         }
       } else {
         this.Alerta_error_null = true;
