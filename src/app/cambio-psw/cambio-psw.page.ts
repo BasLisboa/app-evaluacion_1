@@ -51,7 +51,9 @@ export class CambioPswPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   Cambiar() {
     const usuarioIngresado1 = this.cli_usr_psw;
