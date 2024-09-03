@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { CambioPswPageRoutingModule } from './cambio-psw-routing.module';
 
-import { LoginPage } from './login.page';
+import { CambioPswPage } from './cambio-psw.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
+    CambioPswPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [LoginPage]
+  declarations: [CambioPswPage]
 })
-export class LoginPageModule {}
+export class CambioPswPageModule {}

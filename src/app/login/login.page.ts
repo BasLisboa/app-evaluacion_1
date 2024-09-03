@@ -1,4 +1,25 @@
+//*******************************************************************************/
+//*                                   SecGar                                    */
+//*******************************************************************************/
+//* Proyecto: Login movil                                                       */
+//* Desarrollador: Bastian Lisboa (BAS)                                         */
+//* Fecha: 30-08-2024                                                           */
+//*******************************************************************************/
+//* MODIFICACIONES                                                              */
+//*******************************************************************************/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 30-08-2024                                                           */
+//* Descripcion: Creacion de login                                              */
+//*-----------------------------------------------------------------------------*/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 31-08-2024                                                           */
+//* Descripcion: Modificacion a logica login (BAS01)                            */
+//*******************************************************************************/
+
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SharedDataService } from '../shared-data.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +28,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  formularioLogin: FormGroup;
+  cli_usr: string = '';
+  cli_psw: string = '';
+  Alerta_error: boolean = false;
+  visibleSpinner: boolean = false;
 
-  ngOnInit() {
+  constructor(
+    public fb: FormBuilder,
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) {
+    this.formularioLogin = this.fb.group({
+      'nombre': new FormControl("", Validators.required),
+      'password': new FormControl("", Validators.required)
+    });
   }
 
-<<<<<<< Updated upstream
-=======
   ngOnInit() {}
 
   ingresar() {
@@ -50,5 +81,4 @@ export class LoginPage implements OnInit {
   cambio_psw() {
     this.router.navigate(['cambio-psw']);
   }
->>>>>>> Stashed changes
 }

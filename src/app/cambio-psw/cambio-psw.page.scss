@@ -2,11 +2,17 @@
     --ion-item-background:#ff0000d5;
 }
 
+
 ion-content {
     --background: linear-gradient(to right, #0f0f0f, #2c2b2b); /* De gris claro a gris oscuro */
-}
+  }
 
 
 ion-toolbar {
     --background: rgba(0, 0, 0, 0.589);
+}
+
+.imag{
+   width: 20px;
+   height: 20px;
 }
