@@ -1,31 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-folder',
-  templateUrl: './folder.page.html',
-  styleUrls: ['./folder.page.scss'],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class FolderPage implements OnInit {
-  public folder!: string;
-  public myForm: FormGroup; // Crea un FormGroup para el formulario
-  public nombre = new FormControl('');
-  
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.myForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      
-    });
+export class HomePage implements OnInit {
+  usuarioNombre: string = 'Usuario';  // Nombre del usuario
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
+
+  constructor(private navCtrl: NavController) {}
+
+  ngOnInit() {}
+
+  abrirSubMenu() {
+    // Aquí puedes manejar la apertura de un submenú
+    console.log('Submenú abierto');
   }
 
-  ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
-  }
-
-  submitForm() {
-    // Aquí puedes manejar la lógica cuando se envía el formulario
-    console.log(this.myForm.value);
+  irAlPerfil() {
+    // Navega a la página de perfil
+    this.navCtrl.navigateForward('/perfil');
   }
 }
