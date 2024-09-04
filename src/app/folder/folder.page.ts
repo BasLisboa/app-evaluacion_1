@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-folder',
+  templateUrl: './folder.page.html',
+  styleUrls: ['./folder.page.scss'],
 })
-export class HomePage implements OnInit {
-  usuarioNombre: string = 'Usuario';  // Nombre del usuario
+
+export class FolderPage implements OnInit {
+
+  usuarioNombre: string = 'Usuario';  
   slideOpts = {
     initialSlide: 0,
     speed: 400
@@ -18,12 +20,10 @@ export class HomePage implements OnInit {
   ngOnInit() {}
 
   abrirSubMenu() {
-    // Aquí puedes manejar la apertura de un submenú
     console.log('Submenú abierto');
   }
 
   irAlPerfil() {
-    // Navega a la página de perfil
     this.navCtrl.navigateForward('/perfil');
   }
 }
