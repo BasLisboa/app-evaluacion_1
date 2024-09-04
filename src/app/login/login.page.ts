@@ -51,13 +51,19 @@ export class LoginPage implements OnInit {
     const usuarioIngresado = this.cli_usr;
     const claveIngresada = this.cli_psw;
 
-    // Obtener los arrays desde el servicio
+    // Obtener los arrays desde el servicio angular, aqui se consumen desde el servicio shared-data.service.ts
     const usuarios = this.sharedDataService.getUsuarios();
     const contrasenas = this.sharedDataService.getContrasenas();
 
     const indiceUsuario = usuarios.indexOf(usuarioIngresado);
 
     // Validaciones para clave y usuario INI-BAS01
+    if (usuarioIngresado.length > 0 || claveIngresada.length > 0){
+      this.Alerta_error = false;
+    } else{
+      this.Alerta_error = true;
+    }
+
     if (indiceUsuario !== -1) { 
       const claveCorrespondiente = contrasenas[indiceUsuario];
       if (claveIngresada === claveCorrespondiente) {
