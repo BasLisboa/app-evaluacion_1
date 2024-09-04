@@ -23,6 +23,7 @@ import { SharedDataService } from '../shared-data.service';
   styleUrls: ['./cambio-psw.page.scss'],
 })
 export class CambioPswPage implements OnInit {
+  isLoading: boolean = false; 
   formularioCamPsw: FormGroup;
   cli_usr_psw: string = '';
   cli_psw1: string = '';
@@ -34,7 +35,7 @@ export class CambioPswPage implements OnInit {
   Alerta_error_psw2: boolean = false;
   Alerta_error_psw3: boolean = false;
   Alerta_error_null: boolean = false;
-  visibleSpinnerpsw: boolean = false;
+  Alerta_cambio_ok: boolean = false;
   flag_psw: boolean = false;
   flag_val_psw: boolean = false;
 
@@ -75,7 +76,8 @@ export class CambioPswPage implements OnInit {
         this.Validacion_contraseña();
         if (flag_psw === true){
           this.sharedDataService.updateContrasena(indiceUsuario, this.cli_psw2);
-          this.goLogin();
+          this.Alerta_cambio_ok = true;
+          this.goLogin_ok();
         } 
       } else {
         this.Alerta_error_psw = true; 
@@ -133,15 +135,24 @@ export class CambioPswPage implements OnInit {
   }  
 
 
-  goLogin(){
-    this.router.navigate(['login']);
+  goLogin_ok(){
     this.Alerta_error_psw1 = false;
     this.Alerta_error_psw2 = false;
     this.Alerta_error_psw3 = false;
     this.Alerta_error_psw = false;
     this.Alerta_error_null = false;
     this.Alerta_error_usu = false;
-    this.flag_psw = false;
     this.flag_val_psw = false;
+
+    this.isLoading = true
+    setTimeout(() => {
+      this.isLoading = false;
+      this.router.navigate(['login']);
+      this.Alerta_cambio_ok = false;
+    }, 2500)
+  }
+
+  goLogin(){
+    this.router.navigate(['login']);
   }
 }
