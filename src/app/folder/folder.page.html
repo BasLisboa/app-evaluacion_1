@@ -1,19 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-title>Bienvenido, {{ usuarioNombre }}!</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirSubMenu()">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="irAlPerfil()">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <!-- Carrusel -->
+  <ion-slides [options]="slideOpts">
+    <ion-slide>
+      <img src="assets/img/imagen1.jpg" alt="Imagen 1">
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/imagen2.jpg" alt="Imagen 2">
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/imagen3.jpg" alt="Imagen 3">
+    </ion-slide>
+  </ion-slides>
 
-  <ion-label position="floating">hola papito fumamos??</ion-label>
-  <ion-input [formControl]="nombre"></ion-input>
+  <!-- Card -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Título</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      //--//
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -37,9 +37,13 @@ const routes: Routes = [
   {
     path: 'cambio-psw',
     loadChildren: () => import('./cambio-psw/cambio-psw.module').then( m => m.CambioPswPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   }
-
 ];
+
 
 @NgModule({
   imports: [
