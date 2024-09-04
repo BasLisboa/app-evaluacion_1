@@ -31,7 +31,7 @@ export class SharedDataService {
     return this.contrasenas;
   }
 
-  addUsuario(usuario: string): void {
+  addUsuario(usuario: string): void {-
     this.usuarios.push(usuario);
   }
 
