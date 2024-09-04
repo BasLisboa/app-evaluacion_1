@@ -1,3 +1,17 @@
+//*******************************************************************************/
+//*                                   SecGar                                    */
+//*******************************************************************************/
+//* Proyecto: Servicio conetenedor de arrays                                    */
+//* Desarrollador: Bastian Lisboa (BAS)                                         */
+//* Fecha: 03-09-2024                                                           */
+//*******************************************************************************/
+//* MODIFICACIONES                                                              */
+//*******************************************************************************/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 03-09-2024                                                           */
+//* Descripcion: Creacion de servicios arrays                                   */
+//*-----------------------------------------------------------------------------*/
+//*******************************************************************************/
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -17,7 +31,7 @@ export class SharedDataService {
     return this.contrasenas;
   }
 
-  addUsuario(usuario: string): void {
+  addUsuario(usuario: string): void {-
     this.usuarios.push(usuario);
   }
 

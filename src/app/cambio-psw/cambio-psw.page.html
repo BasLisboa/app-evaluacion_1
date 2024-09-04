@@ -22,6 +22,7 @@
     <ion-item  class="item-background-color" *ngIf="Alerta_error_psw2" ><strong>Contraseñas nuevas no coinciden</strong></ion-item>
     <ion-item  class="item-background-color" *ngIf="Alerta_error_psw3" ><strong>Contraseña nueva no tiene un minimo de 3 caracteres</strong></ion-item>
     <ion-item  class="item-background-color" *ngIf="Alerta_error_null" ><strong>Contraseña nueva esta en blanco</strong></ion-item>
+    <ion-item  class="item-background-color-ok" *ngIf="Alerta_cambio_ok" ><strong>Contraseña cambiada exitosamente</strong></ion-item>
 
     <ion-content class="more_login">
         <ion-card class="card_login">
@@ -58,7 +59,7 @@
                 <br>
         
                 <ion-button class="boton_ingresar" (click)="Cambiar()" fill="clear">
-                    <ion-spinner name="circular" *ngIf="visibleSpinnerpsw" class="ion-margin-end"></ion-spinner>
+                  <ion-spinner *ngIf="isLoading" ></ion-spinner>
                     Cambiar
                 </ion-button>
             </ion-card-content>
