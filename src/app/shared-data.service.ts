@@ -20,6 +20,7 @@ import { Injectable } from '@angular/core';
 export class SharedDataService {
   private usuarios: string[] = ['BAS', 'DAN', 'ADM'];
   private contrasenas: string[] = ['123', '456', '789'];
+  private usuarioLogueado: string = ''; // Para almacenar el usuario logueado
 
   constructor() {}
 
@@ -31,7 +32,15 @@ export class SharedDataService {
     return this.contrasenas;
   }
 
-  addUsuario(usuario: string): void {-
+  setUsuarioLogueado(usuario: string): void {
+    this.usuarioLogueado = usuario;
+  }
+
+  getUsuarioLogueado(): string {
+    return this.usuarioLogueado;
+  }
+
+  addUsuario(usuario: string): void {
     this.usuarios.push(usuario);
   }
 
