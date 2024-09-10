@@ -1,0 +1,74 @@
+//*******************************************************************************/
+//*                                   SecGar                                    */
+//*******************************************************************************/
+//* Proyecto: registro WEB movil                                                */
+//* Desarrollador: Daniel Gálvez (Dan)                                         */
+//* Fecha: 30-08-2024                                                           */
+//*******************************************************************************/
+//* MODIFICACIONES                                                              */
+//*******************************************************************************/
+//* Desarrollador: Daniel Gálvez                                               */
+//* Fecha: 30-08-2024                                                           */
+//* Descripcion: Creacion de WEB                                                */
+//*-----------------------------------------------------------------------------*/
+//*******************************************************************************/
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched" color="danger">
+      El nombre es obligatorio
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input formControlName="apellido"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched" color="danger">
+      El apellido es obligatorio
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input formControlName="correo" type="email"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched" color="danger">
+      Ingrese un correo válido
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="contrasena" type="password"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched" color="danger">
+      La contraseña debe tener al menos 6 caracteres
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar Contraseña</ion-label>
+      <ion-input formControlName="confirmarContrasena" type="password"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="isPasswordMismatch()" color="danger">
+      Las contraseñas no coinciden
+    </ion-note>
+
+    <ion-button expand="full" type="submit" [disabled]="!registroForm.valid">Registrar</ion-button>
+  </form>
+</ion-content>
