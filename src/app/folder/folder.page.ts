@@ -1,5 +1,27 @@
+//*******************************************************************************/
+//*                                   SecGar                                    */
+//*******************************************************************************/
+//* Proyecto: Menu WEB BACK movil                                               */
+//* Desarrollador: Bastian Lisboa & Daniel Galvex                               */
+//* Fecha: 30-08-2024                                                           */
+//*******************************************************************************/
+//* MODIFICACIONES                                                              */
+//*******************************************************************************/
+//* Desarrollador: Bastian Lisboa & Daniel Galvex                               */
+//* Fecha: 30-08-2024                                                           */
+//* Descripcion: Creacion de servicio                                           */
+//*-----------------------------------------------------------------------------*/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 10-09-2024                                                           */
+//* Descripcion: Modificacion para obtener usuario activo para mostrar          */
+//* en menu web (BAS01).                                                        */
+//*-----------------------------------------------------------------------------*/
+//*******************************************************************************/
+
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { SharedDataService } from '../shared-data.service'; 
 
 @Component({
   selector: 'app-folder',
@@ -9,15 +31,33 @@ import { NavController } from '@ionic/angular';
 
 export class FolderPage implements OnInit {
 
-  usuarioNombre: string = 'Usuario';  
+  usuarioNombre: string = '';  
+
   slideOpts = {
     initialSlide: 0,
     speed: 400
   };
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private navCtrl: NavController, 
+    private sharedDataService: SharedDataService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {}
+  // INI-BAS01 - Función para obtener el usuario logueado
+  ngOnInit() {
+    this.obtenerUsuarioLogueado();  
+  }
+
+  obtenerUsuarioLogueado() {
+    const usuarioLogueado = this.sharedDataService.getUsuarioLogueado();
+    if (usuarioLogueado) {
+      this.usuarioNombre = usuarioLogueado; 
+    } else {
+      this.usuarioNombre = 'Invitado'; 
+    }
+  }
+  // FIN-BAS01
 
   abrirSubMenu() {
     console.log('Submenú abierto');
@@ -25,5 +65,9 @@ export class FolderPage implements OnInit {
 
   irAlPerfil() {
     this.navCtrl.navigateForward('/perfil');
+  }
+
+  goLogin(){
+    this.router.navigate(['login']);
   }
 }
