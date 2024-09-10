@@ -58,20 +58,24 @@ export class LoginPage implements OnInit {
     const indiceUsuario = usuarios.indexOf(usuarioIngresado);
 
     // Validaciones para clave y usuario INI-BAS01
-    if (usuarioIngresado.length > 0 || claveIngresada.length > 0){
+    if (usuarioIngresado.length > 0 && claveIngresada.length > 0) {
       this.Alerta_error = false;
-    } else{
-      this.Alerta_error = true;
-    }
 
-    if (indiceUsuario !== -1) { 
-      const claveCorrespondiente = contrasenas[indiceUsuario];
-      if (claveIngresada === claveCorrespondiente) {
-        this.Alerta_error = false;
-        this.router.navigate(['folder']);
+      if (indiceUsuario !== -1) { 
+        const claveCorrespondiente = contrasenas[indiceUsuario];
+        if (claveIngresada === claveCorrespondiente) {
+          this.Alerta_error = false;
+
+          this.sharedDataService.setUsuarioLogueado(usuarioIngresado);
+
+          this.router.navigate(['folder']);
+        } else {
+          this.Alerta_error = true;
+        }
       } else {
         this.Alerta_error = true;
       }
+
     } else {
       this.Alerta_error = true;
     }
@@ -80,5 +84,9 @@ export class LoginPage implements OnInit {
 
   cambio_psw() {
     this.router.navigate(['cambio-psw']);
+  }
+
+  registrar_usu() {
+    this.router.navigate(['registro']);
   }
 }
