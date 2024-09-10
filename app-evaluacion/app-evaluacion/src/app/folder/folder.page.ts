@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-folder',
+  selector: 'app-home',
   templateUrl: './folder.page.html',
   styleUrls: ['./folder.page.scss'],
 })
-
-export class FolderPage implements OnInit {
-
+export class folderPage implements OnInit {
   usuarioNombre: string = 'Usuario';  
   slideOpts = {
     initialSlide: 0,
