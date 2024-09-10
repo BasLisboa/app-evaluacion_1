@@ -29,7 +29,6 @@ export class RegistroPage implements OnInit {
 
   onSubmit() {
     if (this.registroForm.valid) {
-      // Aquí puedes manejar el envío del formulario
       console.log('Formulario válido', this.registroForm.value);
     }
   }
