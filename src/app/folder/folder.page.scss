@@ -36,3 +36,37 @@ ion-menu::part(container) {
 
   box-shadow: 4px 0px 16px rgba(102, 99, 102, 0.18);
 }
+
+.titulo-alineado {
+  display: inline-flex;
+  align-items: center; 
+}
+
+.imagusu {
+  font-size: 30px;
+  margin-right: 8px; 
+  vertical-align: middle;
+}
+
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+.card {
+  width: 28rem;
+  background-color: black;
+  color: white;
+}
+
+body{
+  background-color: black;
+}
+
+.botonn{
+  background-color: white;
+  color: black;
+}
