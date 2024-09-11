@@ -22,6 +22,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { SharedDataService } from '../shared-data.service'; 
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-folder',
@@ -41,7 +42,8 @@ export class FolderPage implements OnInit {
   constructor(
     private navCtrl: NavController, 
     private sharedDataService: SharedDataService,
-    private router: Router
+    private router: Router,
+    private menu: MenuController
   ) {}
 
   // INI-BAS01 - Función para obtener el usuario logueado
@@ -57,17 +59,23 @@ export class FolderPage implements OnInit {
       this.usuarioNombre = 'Invitado'; 
     }
   }
-  // FIN-BAS01
 
-  abrirSubMenu() {
-    console.log('Submenú abierto');
-  }
-
-  irAlPerfil() {
-    this.navCtrl.navigateForward('/perfil');
+  cerrarMenu() {
+    this.menu.close(); 
   }
 
   goLogin(){
+    this.menu.close();
     this.router.navigate(['login']);
+  }
+
+  goFolder(){
+    this.menu.close();
+    this.router.navigate(['folder']);
+  }
+  // FIN-BAS01
+
+  irAlPerfil() {
+    this.navCtrl.navigateForward('/perfil');
   }
 }
