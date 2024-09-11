@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { CambioPswPageRoutingModule } from './cambio-psw-routing.module';
 
-import { FolderPage } from './folder.page';
+import { CambioPswPage } from './cambio-psw.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    CambioPswPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [FolderPage]
+  declarations: [CambioPswPage]
 })
-export class FolderPageModule {}
+export class CambioPswPageModule {}

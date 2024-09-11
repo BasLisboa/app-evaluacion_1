@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { folderPageRoutingModule } from './folder-routing.module';
 
-import { FolderPage } from './folder.page';
+import { folderPage } from './folder.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { FolderPage } from './folder.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    folderPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [folderPage]
 })
-export class FolderPageModule {}
+export class folderPageModule {}

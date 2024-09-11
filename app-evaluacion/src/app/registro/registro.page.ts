@@ -1,18 +1,3 @@
-//*******************************************************************************/
-//*                                   SecGar                                    */
-//*******************************************************************************/
-//* Proyecto: registro WEB movil                                                   */
-//* Desarrollador: Daniel Gálvez (Dan)                                         */
-//* Fecha: 30-08-2024                                                           */
-//*******************************************************************************/
-//* MODIFICACIONES                                                              */
-//*******************************************************************************/
-//* Desarrollador: Daniel Gálvez                                               */
-//* Fecha: 30-08-2024                                                           */
-//* Descripcion: Creacion de WEB                                                */
-//*-----------------------------------------------------------------------------*/
-//*******************************************************************************/
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -21,13 +6,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
+export class RegistroPage implements OnInit {
+  registroForm: FormGroup;
 
-export class registro implements OnInit {
-  registroForm!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {
     this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -36,6 +18,8 @@ export class registro implements OnInit {
       confirmarContrasena: ['', Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
+
+  ngOnInit() {}
 
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('contrasena')?.value;
@@ -46,12 +30,6 @@ export class registro implements OnInit {
   onSubmit() {
     if (this.registroForm.valid) {
       console.log('Formulario válido', this.registroForm.value);
-    } else {
-      console.log('Formulario inválido');
     }
-  }
-
-  isPasswordMismatch() {
-    return this.registroForm.errors?.['mismatch'] && this.registroForm.get('confirmarContrasena')?.touched;
   }
 }
