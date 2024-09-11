@@ -59,18 +59,11 @@ export class FolderPage implements OnInit {
       this.usuarioNombre = 'Invitado'; 
     }
   }
-
-  cerrarMenu() {
-    this.menu.close(); 
-  }
-
   goLogin(){
-    this.menu.close();
     this.router.navigate(['login']);
   }
 
   goFolder(){
-    this.menu.close();
     this.router.navigate(['folder']);
   }
   // FIN-BAS01
