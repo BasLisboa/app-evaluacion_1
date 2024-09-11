@@ -9,7 +9,7 @@
 //*******************************************************************************/
 //* Desarrollador: Bastian Lisboa                                               */
 //* Fecha: 03-09-2024                                                           */
-//* Descripcion: Creacion de servicios arrays                                   */
+//* Descripcion: Creacion de servicios arrays y cache                           */
 //*-----------------------------------------------------------------------------*/
 //*******************************************************************************/
 import { Injectable } from '@angular/core';
@@ -20,7 +20,7 @@ import { Injectable } from '@angular/core';
 export class SharedDataService {
   private usuarios: string[] = ['BAS', 'DAN', 'ADM'];
   private contrasenas: string[] = ['123', '456', '789'];
-  private usuarioLogueado: string = ''; // Para almacenar el usuario logueado
+  private usuarioLogueado: string = ''; 
 
   constructor() {}
 
