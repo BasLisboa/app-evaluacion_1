@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>
     <ion-title>Registro</ion-title>
   </ion-toolbar>
@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registroForm">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre"></ion-input>
@@ -26,20 +26,20 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Correo</ion-label>
-      <ion-input formControlName="correo" type="email"></ion-input>
-    </ion-item>
-
-    <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="contrasena" type="password"></ion-input>
+      <ion-input formControlName="password1" type="password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Confirmar Contraseña</ion-label>
-      <ion-input formControlName="confirmarContrasena" type="password"></ion-input>
+      <ion-input formControlName="password2" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="Alerta">
+      <ion-label color="danger">{{ mensajeError }}</ion-label>
     </ion-item>
 
     <ion-button expand="full" type="submit" [disabled]="!registroForm.valid">Registrar</ion-button>
+    <ion-button expand="full" color="light" (click)="goBack()">Volver al Login</ion-button>
   </form>
 </ion-content>
