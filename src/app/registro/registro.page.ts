@@ -1,3 +1,17 @@
+//*******************************************************************************/
+//*                                   SecGar                                    */
+//*******************************************************************************/
+//* Proyecto: Cambio password WEB movil                                         */
+//* Desarrollador: Bastian Lisboa (BAS)                                         */
+//* Fecha: 11-09-2024                                                           */
+//*******************************************************************************/
+//* MODIFICACIONES                                                              */
+//*******************************************************************************/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 11-09-2024                                                           */
+//* Descripcion: Creacion de WEB                                                */
+//*-----------------------------------------------------------------------------*/
+//*******************************************************************************/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
@@ -41,63 +55,59 @@ export class RegistroPage implements OnInit {
     this.router.navigate(['login']);
   }
 
-  Registrar(){
-    const NombreUsuario = this.cli_usr_reg;
-    const password1 = this.cli_psw1_reg;
-
+  Registrar() {
     this.ValidacionesRegistrar();
-    if (this.flag_validaciones == false){
+    
+    if (!this.flag_validaciones) {
+      const NombreUsuario = this.formularioRegistro.get('nombre_reg')?.value;
+      const password1 = this.formularioRegistro.get('password1_reg')?.value;
+      
       this.sharedDataService.addUsuario(NombreUsuario);
       this.sharedDataService.addContrasena(password1);
       this.Alerta_err_reg = false;
       this.Alerta_ok_reg = true;
       this.goLogin_reg();
-    }
-    else{
+    } else {
       this.Alerta_err_reg = true;
       this.Alerta_ok_reg = false;
     }
   }
 
-  ValidacionesRegistrar(){
-    const NombreVal = this.cli_usr_reg;
-    const password1_val = this.cli_psw1_reg;
-    const password2_val = this.cli_psw2_reg;
+  ValidacionesRegistrar() {
+    const nombreVal = this.formularioRegistro.get('nombre_reg')?.value;
+    const password1_val = this.formularioRegistro.get('password1_reg')?.value;
+    const password2_val = this.formularioRegistro.get('password2_reg')?.value;
     const contieneMayuscula = /[A-Z]/.test(password1_val);
-    const contieneMayuscula2 = /[A-Z]/.test(password2_val);
-    
+
+    //alertas
     this.flag_validaciones = false;
-    if (NombreVal.length == 0 && password1_val.length == 0 && password2_val.length == 0){
+    this.Alerta_err_bks = false;
+    this.Alerta_lar_usu = false;
+    this.Alerta_psw_val = false;
+
+    // Validar campos vacíos
+    if (!nombreVal || !password1_val || !password2_val) {
       this.Alerta_err_bks = true;
       this.flag_validaciones = true;
+      return; 
     }
-    else {
-      //VALIDA LARGO MINIMO USUARIO
-      if(NombreVal.length > 0 && NombreVal.length < 3){
-        this.Alerta_lar_usu = true;
-        this.flag_validaciones = true;
-      } else {
-        this.Alerta_lar_usu = false;
-        this.flag_validaciones = false;
-      }
 
-      //VALIDA IGUALDAD CLAVES 
-      if (password1_val != password2_val){
-        this.Alerta_psw_val = true;
-        this.flag_validaciones = true;
-      } else{
-        this.Alerta_psw_val = false;
-        this.flag_validaciones = false;
-      }
+    // Validar largo del nombre de usuario
+    if (nombreVal.length < 3) {
+      this.Alerta_lar_usu = true;
+      this.flag_validaciones = true;
+    }
 
-      //VALIDA QUE CONTENGA MAYUSCULA
-      if (!contieneMayuscula && !contieneMayuscula2) {
-        this.Alerta_psw_val = true;
-        this.flag_validaciones = true;
-      } else {
-        this.Alerta_psw_val = false;
-        this.flag_validaciones = false;
-      }
+    // Validar igualdad de contraseñas
+    if (password1_val !== password2_val) {
+      this.Alerta_psw_val = true;
+      this.flag_validaciones = true;
+    }
+
+    // Validar que la contraseña contenga al menos una mayúscula
+    if (!contieneMayuscula) {
+      this.Alerta_psw_val = true;
+      this.flag_validaciones = true;
     }
   }
 }

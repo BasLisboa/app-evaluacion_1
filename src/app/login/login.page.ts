@@ -48,8 +48,9 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   ingresar() {
-    const usuarioIngresado = this.cli_usr;
-    const claveIngresada = this.cli_psw;
+    const usuarioIngresado = this.formularioLogin.get('nombre')?.value;
+    const claveIngresada = this.formularioLogin.get('password')?.value;
+    
 
     // Obtener los arrays desde el servicio angular, aqui se consumen desde el servicio shared-data.service.ts
     const usuarios = this.sharedDataService.getUsuarios();

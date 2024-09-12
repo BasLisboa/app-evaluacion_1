@@ -2,12 +2,12 @@
 //*                                   SecGar                                    */
 //*******************************************************************************/
 //* Proyecto: Menu WEB BACK movil                                               */
-//* Desarrollador: Bastian Lisboa & Daniel Galvex                               */
+//* Desarrollador: Bastian Lisboa                                               */
 //* Fecha: 30-08-2024                                                           */
 //*******************************************************************************/
 //* MODIFICACIONES                                                              */
 //*******************************************************************************/
-//* Desarrollador: Bastian Lisboa & Daniel Galvex                               */
+//* Desarrollador: Bastian Lisboa                                               */
 //* Fecha: 30-08-2024                                                           */
 //* Descripcion: Creacion de servicio                                           */
 //*-----------------------------------------------------------------------------*/
@@ -21,6 +21,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDataService } from '../shared-data.service'; 
+import { MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-folder',
@@ -39,7 +41,8 @@ export class FolderPage implements OnInit {
 
   constructor( 
     private sharedDataService: SharedDataService,
-    private router: Router
+    private router: Router,
+    private menuCtrl: MenuController
   ) {}
 
   // INI-BAS01 - Función para obtener el usuario logueado
@@ -56,12 +59,13 @@ export class FolderPage implements OnInit {
     }
   }
   goLogin(){
-    this.router.navigate(['login']);
+    this.menuCtrl.close('main-content');
+    this.router.navigate(['login']); 
   }
 
   goFolder(){
+    this.menuCtrl.close('main-content');
     this.router.navigate(['folder']);
   }
   // FIN-BAS01
-
 }
