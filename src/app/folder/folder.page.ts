@@ -19,10 +19,8 @@
 //*******************************************************************************/
 
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { SharedDataService } from '../shared-data.service'; 
-import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-folder',
@@ -39,11 +37,9 @@ export class FolderPage implements OnInit {
     speed: 400
   };
 
-  constructor(
-    private navCtrl: NavController, 
+  constructor( 
     private sharedDataService: SharedDataService,
-    private router: Router,
-    private menu: MenuController
+    private router: Router
   ) {}
 
   // INI-BAS01 - Función para obtener el usuario logueado
@@ -68,7 +64,4 @@ export class FolderPage implements OnInit {
   }
   // FIN-BAS01
 
-  irAlPerfil() {
-    this.navCtrl.navigateForward('/perfil');
-  }
 }

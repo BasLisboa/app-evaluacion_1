@@ -1,0 +1,19 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="light">
+      <ion-title class="titulo-alineado"><ion-icon name="person-circle-outline" class="imagusu"></ion-icon>{{usuarioNombre}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item [routerLink]="['folder']">Principal</ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 btn_cerr">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['login']" >Cerrar sesion</a>
+      </li>
+    </ul>
+  </ion-footer>
+</ion-menu>

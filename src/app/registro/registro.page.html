@@ -1,45 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Registro</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!--//*******************************************************************************/
+    //*                                   SecGar                                    */
+    //*******************************************************************************/
+    //* Proyecto: Cambio password WEB movil                                         */
+    //* Desarrollador: Bastian Lisboa (BAS)                                         */
+    //* Fecha: 11-09-2024                                                           */
+    //*******************************************************************************/
+    //* MODIFICACIONES                                                              */
+    //*******************************************************************************/
+    //* Desarrollador: Bastian Lisboa                                               */
+    //* Fecha: 11-09-2024                                                           */
+    //* Descripcion: Creacion de WEB                                                */
+    //*-----------------------------------------------------------------------------*/
+    //*******************************************************************************/-->
+    <ion-header>
+    </ion-header>
+    <link rel="stylesheet" href="/assets/css/reg_styles.css">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-item  class="item-background-color" *ngIf="Alerta_err_reg"  ><strong>Registro no valido</strong></ion-item>
+    <ion-item  class="item-background-color" *ngIf="Alerta_lar_usu"  ><strong>Usuario debe tener mas de 2 caracteres</strong></ion-item>
+    <ion-item  class="item-background-color" *ngIf="Alerta_psw_val"  ><strong>Contraseñas no son iguales</strong></ion-item>
+    <ion-item  class="item-background-color" *ngIf="Alerta_err_bks"  ><strong>Campos en blanco</strong></ion-item>
+    <ion-item  class="item-background-color-ok" *ngIf="Alerta_ok_reg"  ><strong>Registrado exitosamente</strong></ion-item>
 
-  <form [formGroup]="registroForm">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input formControlName="nombre"></ion-input>
-    </ion-item>
+    <ion-content class="more_reg">
+        <ion-card class="card_reg">
+            <ion-card-header>
+              <ion-icon class="imag" (click)="goLogin_reg()" name="arrow-back-circle-outline"></ion-icon>
+                <ion-row>
+                    <ion-col>
+                        <h1 style="text-align: center;"><strong>Registrar usuarios</strong></h1>
+                    </ion-col>
+                </ion-row>
+            </ion-card-header>
+            <ion-card-content>
+                <form [formGroup]="formularioRegistro">
+                  <ion-item>
+                    <ion-icon name="person-outline" style="margin-right: 0.5vh;"></ion-icon>
+                    <ion-input [(ngModel)]="cli_usr_reg" formControlName="usuario_reg" required placeholder="Usuario"></ion-input>
+                  </ion-item>
+                  <br />
+                  <ion-item>
+                    <ion-icon name="lock-closed-outline" style="margin-right: 0.5vh;"></ion-icon>
+                    <ion-input [(ngModel)]="cli_psw1_reg" formControlName="password1_reg" type="password" required placeholder="Contraseña"></ion-input>
+                  </ion-item>
+                  <br />
+                  <ion-item>
+                      <ion-icon name="lock-closed-outline" style="margin-right: 0.5vh;"></ion-icon>
+                      <ion-input [(ngModel)]="cli_psw2_reg" formControlName="password2_reg" type="password" required placeholder="Repetir contraseña"></ion-input>
+                  </ion-item>
+                  <br />
+                </form>
+                <br>
+        
+                <ion-button class="boton_registrar" (click)="Registrar()" fill="clear">
+                  <ion-spinner *ngIf="isLoading_reg" ></ion-spinner>
+                    Registrar
+                </ion-button>
+            </ion-card-content>
+        </ion-card>
+    </ion-content>
+    
+    <ion-footer>
+      <ion-toolbar>
+        <ion-title>&copy; <span id="year"></span> SecGar. Todos los derechos reservados.</ion-title>
+      </ion-toolbar>
+    </ion-footer>
 
-    <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
-      <ion-input formControlName="apellido"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password1" type="password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Confirmar Contraseña</ion-label>
-      <ion-input formControlName="password2" type="password"></ion-input>
-    </ion-item>
-
-    <ion-item *ngIf="Alerta">
-      <ion-label color="danger">{{ mensajeError }}</ion-label>
-    </ion-item>
-
-    <ion-button expand="full" type="submit" [disabled]="!registroForm.valid">Registrar</ion-button>
-    <ion-button expand="full" color="light" (click)="goBack()">Volver al Login</ion-button>
-  </form>
-</ion-content>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
