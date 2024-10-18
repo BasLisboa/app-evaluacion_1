@@ -1,5 +1,5 @@
 //*******************************************************************************/
-//*                                   SecGar                                    */
+//*                                   DuocQR                                    */
 //*******************************************************************************/
 //* Proyecto: Servicio conetenedor de arrays                                    */
 //* Desarrollador: Bastian Lisboa (BAS)                                         */
@@ -11,24 +11,30 @@
 //* Fecha: 03-09-2024                                                           */
 //* Descripcion: Creacion de servicios arrays y cache                           */
 //*-----------------------------------------------------------------------------*/
+//* Desarrollador: Bastian Lisboa                                               */
+//* Fecha: 18-10-2024                                                           */
+//* Descripcion: Se modifica servicio por base de datos (BAS01)                 */
 //*******************************************************************************/
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
+
+//BAS01-INI     
 export class SharedDataService {
-  private usuarios: string[] = ['BAS', 'DAN', 'ADM'];
-  private contrasenas: string[] = ['123', '456', '789'];
+  //SE CAMBIAN DE STRING[] A STRING ESTAS 3 VARIABLES.
+  private usuarios: string = '';
+  private contrasenas: string = '';
   private usuarioLogueado: string = ''; 
 
   constructor() {}
 
-  getUsuarios(): string[] {
+  getUsuarios(): string {
     return this.usuarios;
   }
 
-  getContrasenas(): string[] {
+  getContrasenas(): string {
     return this.contrasenas;
   }
 
@@ -40,6 +46,8 @@ export class SharedDataService {
     return this.usuarioLogueado;
   }
 
+  //SE COMENTA CODIGO NO UTILIZADO
+  /*
   addUsuario(usuario: string): void {
     this.usuarios.push(usuario);
   }
@@ -53,4 +61,5 @@ export class SharedDataService {
       this.contrasenas[indice] = nuevaContrasena;
     }
   }
+  */
 }

@@ -1,7 +1,7 @@
 //*******************************************************************************/
-//*                                   SecGar                                    */
+//*                                   DuocQR                                    */
 //*******************************************************************************/
-//* Proyecto: Cambio password WEB movil                                         */
+//* Proyecto: registro usuario                                                  */
 //* Desarrollador: Bastian Lisboa (BAS)                                         */
 //* Fecha: 11-09-2024                                                           */
 //*******************************************************************************/
@@ -9,13 +9,15 @@
 //*******************************************************************************/
 //* Desarrollador: Bastian Lisboa                                               */
 //* Fecha: 11-09-2024                                                           */
-//* Descripcion: Creacion de WEB                                                */
+//* Descripcion: Creacion de servicio                                           */
 //*-----------------------------------------------------------------------------*/
 //*******************************************************************************/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { SharedDataService } from '../shared-data.service';
+import { ConexionBDService } from '../services/conexion-bd.service';
+import { ApiServiceService } from '../services/api-service.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-registro',
@@ -23,91 +25,97 @@ import { SharedDataService } from '../shared-data.service';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-  formularioRegistro: FormGroup;
+
+  //flags
   flag_validaciones: boolean = false; 
-  Alerta_err_reg: boolean = false;
-  Alerta_ok_reg: boolean = false;
   Alerta_err_bks: boolean = false;
-  Alerta_lar_usu: boolean = false;
-  Alerta_psw_val: boolean = false;
+
+
+  //carga
   visibleSpinner: boolean = false;
+
+  //Variables globales
   cli_usr_reg: string = '';
-  cli_psw1_reg: string = '';
-  cli_psw2_reg: string = '';
+  cli_psw_reg: string = '';
+  cli_nombre_reg: string = '';
+  cli_apellido_reg: string = '';
+  cli_carrera_reg: string = '';
   isLoading_reg: boolean = false;   
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
-    private sharedDataService: SharedDataService
-  ) {
-    this.formularioRegistro = this.fb.group({
-      nombre_reg: new FormControl("", Validators.required),
-      password1_reg: new FormControl("", Validators.required),
-      password2_reg: new FormControl("", Validators.required),
-    });
-  }
+    private sharedDataService: SharedDataService,
+    private conexionBDService: ConexionBDService,
+    private apiService: ApiServiceService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.conexionBDService.abrirDB();
+  }
 
 
   goLogin_reg(){
     this.router.navigate(['login']);
   }
 
+
+  
   Registrar() {
+
+    this.flag_validaciones = false;
+
     this.ValidacionesRegistrar();
     
-    if (!this.flag_validaciones) {
-      const NombreUsuario = this.formularioRegistro.get('nombre_reg')?.value;
-      const password1 = this.formularioRegistro.get('password1_reg')?.value;
-      
-      this.sharedDataService.addUsuario(NombreUsuario);
-      this.sharedDataService.addContrasena(password1);
-      this.Alerta_err_reg = false;
-      this.Alerta_ok_reg = true;
+    if (this.flag_validaciones = true) {
+
+      //BAS01-INI SE QUITA LA LOGICA ANTIGUA
+      /*this.sharedDataService.addUsuario(NombreUsuario);
+      this.sharedDataService.addContrasena(password1);*/
+      //BAS01-FIN
+
+      this.ApiRegistrar(this.cli_usr_reg,this.cli_psw_reg,this.cli_nombre_reg,this.cli_apellido_reg,this.cli_carrera_reg);
+
       this.goLogin_reg();
     } else {
-      this.Alerta_err_reg = true;
-      this.Alerta_ok_reg = false;
+      this.flag_validaciones = false
     }
   }
 
   ValidacionesRegistrar() {
-    const nombreVal = this.formularioRegistro.get('nombre_reg')?.value;
-    const password1_val = this.formularioRegistro.get('password1_reg')?.value;
-    const password2_val = this.formularioRegistro.get('password2_reg')?.value;
-    const contieneMayuscula = /[A-Z]/.test(password1_val);
-
     //alertas
     this.flag_validaciones = false;
     this.Alerta_err_bks = false;
-    this.Alerta_lar_usu = false;
-    this.Alerta_psw_val = false;
+
 
     // Validar campos vacíos
-    if (!nombreVal || !password1_val || !password2_val) {
+    if (!this.cli_usr_reg || !this.cli_psw_reg || !this.cli_nombre_reg || !this.cli_apellido_reg || !this.cli_carrera_reg) {
       this.Alerta_err_bks = true;
       this.flag_validaciones = true;
       return; 
     }
+  }
 
-    // Validar largo del nombre de usuario
-    if (nombreVal.length < 3) {
-      this.Alerta_lar_usu = true;
-      this.flag_validaciones = true;
-    }
+  async ApiRegistrar(mail: string,pass: string,nombre: string,apellido: string,carrera: string){
+    let datos = this.apiService.crearUsuario(
+                                          mail, 
+                                          pass,
+                                          nombre,
+                                          apellido,
+                                          carrera
+    );
 
-    // Validar igualdad de contraseñas
-    if (password1_val !== password2_val) {
-      this.Alerta_psw_val = true;
-      this.flag_validaciones = true;
-    }
-
-    // Validar que la contraseña contenga al menos una mayúscula
-    if (!contieneMayuscula) {
-      this.Alerta_psw_val = true;
-      this.flag_validaciones = true;
+    let respuesta = await lastValueFrom(datos);
+    
+    let json_texto = JSON.stringify(respuesta);
+    let json = JSON.parse(json_texto);
+    
+    if(json[0].RESPUESTA == 'success') {
+      console.log(json[0].RESPUESTA)
+      this.goLogin_reg();
+    } else {
+      console.log("CREDENCIALES INVÁLIDAS");
     }
   }
+
+  
 }

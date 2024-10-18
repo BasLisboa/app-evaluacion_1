@@ -17,8 +17,6 @@
 <link rel="stylesheet" href="/assets/css/reg_styles.css">
 
 <ion-item class="item-background-color" *ngIf="Alerta_err_reg" ><strong>Registro no valido</strong></ion-item>
-<ion-item class="item-background-color" *ngIf="Alerta_lar_usu" ><strong>Usuario debe tener más de 2 caracteres</strong></ion-item>
-<ion-item class="item-background-color" *ngIf="Alerta_psw_val" ><strong>Contraseñas no son iguales o no cumplen los requisitos</strong></ion-item>
 <ion-item class="item-background-color" *ngIf="Alerta_err_bks" ><strong>Campos en blanco</strong></ion-item>
 <ion-item class="item-background-color-ok" *ngIf="Alerta_ok_reg" ><strong>Registrado exitosamente</strong></ion-item>
 
@@ -33,22 +31,31 @@
             </ion-row>
         </ion-card-header>
         <ion-card-content>
-            <form [formGroup]="formularioRegistro">
+            <form>
                 <ion-item>
                     <ion-icon name="person-outline" style="margin-right: 0.5vh;"></ion-icon>
-                    <ion-input formControlName="nombre_reg" required placeholder="Usuario"></ion-input>
+                    <ion-input [(ngModel)]="cli_usr_reg" required placeholder="Correo"></ion-input>
                 </ion-item>
                 <br />
                 <ion-item>
                     <ion-icon name="lock-closed-outline" style="margin-right: 0.5vh;"></ion-icon>
-                    <ion-input formControlName="password1_reg" type="password" required placeholder="Contraseña"></ion-input>
+                    <ion-input [(ngModel)]="cli_psw_reg" type="password" required placeholder="Contraseña"></ion-input>
                 </ion-item>
                 <br />
                 <ion-item>
                     <ion-icon name="lock-closed-outline" style="margin-right: 0.5vh;"></ion-icon>
-                    <ion-input formControlName="password2_reg" type="password" required placeholder="Repetir contraseña"></ion-input>
+                    <ion-input [(ngModel)]="cli_nombre_reg" type="text" required placeholder="Nombre"></ion-input>
                 </ion-item>
                 <br />
+                <ion-item>
+                    <ion-icon name="lock-closed-outline" style="margin-right: 0.5vh;"></ion-icon>
+                    <ion-input [(ngModel)]="cli_apellido_reg" type="text" required placeholder="Apellido"></ion-input>
+                </ion-item>
+                <br />
+                <ion-item>
+                    <ion-icon name="person-outline" style="margin-right: 0.5vh;"></ion-icon>
+                    <ion-input [(ngModel)]="cli_carrera_reg" required placeholder="Carrera"></ion-input>
+                </ion-item>
             </form>
             <br>
             <ion-button class="boton_registrar" (click)="Registrar()" fill="clear">
