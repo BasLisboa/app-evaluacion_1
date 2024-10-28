@@ -16,9 +16,9 @@
 </ion-header>
 <link rel="stylesheet" href="/assets/css/reg_styles.css">
 
-<ion-item class="item-background-color" *ngIf="Alerta_err_reg" ><strong>Registro no valido</strong></ion-item>
 <ion-item class="item-background-color" *ngIf="Alerta_err_bks" ><strong>Campos en blanco</strong></ion-item>
-<ion-item class="item-background-color-ok" *ngIf="Alerta_ok_reg" ><strong>Registrado exitosamente</strong></ion-item>
+<ion-item class="item-background-color-ok" *ngIf="Alerta_ok_reg" ><strong>{{ api_msj }} - {{ api_sts }}</strong></ion-item>
+<ion-item class="item-background-color" *ngIf="Alerta_err" ><strong>{{ api_msj }} - {{ api_sts }}</strong></ion-item>
 
 <ion-content class="more_reg">
     <ion-card class="card_reg">

@@ -2,7 +2,7 @@
 //*                                   SecGar                                    */
 //*******************************************************************************/
 //* Proyecto: Cambio psw movil                                                  */
-//* Desarrollador: Bastian Lisboa && Daniel Galvez                              */
+//* Desarrollador: Bastian Lisboa                  yyyy                             */
 //* Fecha: 03-09-2024                                                           */
 //*******************************************************************************/
 //* MODIFICACIONES                                                              */
@@ -41,7 +41,17 @@ const routes: Routes = [
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'admin-sql',
+    loadChildren: () => import('./admin-sql/admin-sql.module').then( m => m.AdminSqlPageModule)
+  },
+  {
+    path: 'mostrar-sede',
+    loadChildren: () => import('./mostrar-sede/mostrar-sede.module').then( m => m.MostrarSedePageModule)
   }
+
+
 ];
 
 

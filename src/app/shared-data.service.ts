@@ -17,6 +17,7 @@
 //*******************************************************************************/
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,19 +25,10 @@ import { Injectable } from '@angular/core';
 //BAS01-INI     
 export class SharedDataService {
   //SE CAMBIAN DE STRING[] A STRING ESTAS 3 VARIABLES.
-  private usuarios: string = '';
-  private contrasenas: string = '';
+
   private usuarioLogueado: string = ''; 
 
   constructor() {}
-
-  getUsuarios(): string {
-    return this.usuarios;
-  }
-
-  getContrasenas(): string {
-    return this.contrasenas;
-  }
 
   setUsuarioLogueado(usuario: string): void {
     this.usuarioLogueado = usuario;
@@ -46,8 +38,20 @@ export class SharedDataService {
     return this.usuarioLogueado;
   }
 
+  
   //SE COMENTA CODIGO NO UTILIZADO
   /*
+  //private usuarios: string = '';
+  //private contrasenas: string = '';
+
+  getUsuarios(): string {
+    return this.usuarios;
+  }
+
+  getContrasenas(): string {
+    return this.contrasenas;
+  }
+
   addUsuario(usuario: string): void {
     this.usuarios.push(usuario);
   }

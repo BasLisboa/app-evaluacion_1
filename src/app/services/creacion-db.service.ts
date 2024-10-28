@@ -3,12 +3,12 @@
 //*******************************************************************************/
 //* Proyecto: Conexion a la base de datos                                       */
 //* Desarrollador: Bastian Lisboa (BAS)                                         */
-//* Fecha: 06-10-2024                                                           */
+//* Fecha: 16-10-2024                                                           */
 //*******************************************************************************/
 //* MODIFICACIONES                                                              */
 //*******************************************************************************/
 //* Desarrollador: Bastian Lisboa                                               */
-//* Fecha: 06-10-2024                                                           */
+//* Fecha: 16-10-2024                                                           */
 //* Descripcion: Creacion de servicio                                           */
 //*-----------------------------------------------------------------------------*/
 //*******************************************************************************/
@@ -27,7 +27,7 @@ export class CreacionDBService {
     this.inicializarBD(); 
   }
 
-  private async inicializarBD() {
+  async inicializarBD() {
     try {
       await this.conexionBDService.abrirDB(); 
       const database = this.conexionBDService.getDB();
@@ -43,51 +43,58 @@ export class CreacionDBService {
   }
 
   // Método para crear tablas
-  private async createTables(database: SQLiteObject) {
+  async createTables(database: SQLiteObject) {
     try {
+
       console.log('Creando tabla TB_USUARIOS...');
       await database.executeSql(`
         CREATE TABLE IF NOT EXISTS TB_USUARIOS (
-          USR_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-          USR_RUT VARCHAR(15) NOT NULL UNIQUE,
-          USR_USER VARCHAR(15) NOT NULL,
-          USR_PSW VARCHAR(30) NOT NULL
+          USR_ID INTEGER PRIMARY KEY AUTOINCREMENT,  
+          USR_CORREO VARCHAR(100) UNIQUE,
+          USR_PSW VARCHAR(100) NOT NULL,
+          USR_NOM VARCHAR(100) NOT NULL,
+          USR_APE VARCHAR(100) NOT NULL,
+          USR_CAR VARCHAR(100) NOT NULL
         )
       `, []);
       console.log('Tabla TB_USUARIOS creada con éxito.');
 
-      console.log('Creando tabla TB_ASIGNATURAS...');
+
+      
+      console.log('Creando tabla TB_LOG...');
+
       await database.executeSql(`
-        CREATE TABLE IF NOT EXISTS TB_ASIGNATURAS (
-          ASG_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-          ASG_NOMBRE VARCHAR(50) NOT NULL UNIQUE
+        CREATE TABLE IF NOT EXISTS TB_LOG (
+          LOG_ID  INTEGER PRIMARY KEY AUTOINCREMENT,
+          LOG_COR VARCHAR(100) NOT NULL,
+          LOG_HOR VARCHAR(100) NOT NULL,
+          LOG_FEC VARCHAR(100) NOT NULL,
+          LOG_MSG VARCHAR(100),
+          LOG_STS VARCHAR(100)
         )
       `, []);
-      console.log('Tabla TB_ASIGNATURAS creada con éxito.');
-
-      console.log('Creando tabla TB_ASISTENCIA...');
+      console.log('Tabla TB_LOG creada con éxito.');
+    
+      
+     //SES_FLG:  0(no logeado) - 1(logeado)
       await database.executeSql(`
-        CREATE TABLE IF NOT EXISTS TB_ASISTENCIA (
-          AST_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-          USR_ID INTEGER NOT NULL,
-          ASG_ID INTEGER NOT NULL,
-          AST_FECHA DATE NOT NULL,
-          AST_ESTADO VARCHAR(10) NOT NULL,
-          FOREIGN KEY (USR_ID) REFERENCES TB_USUARIOS(USR_ID) ON DELETE CASCADE,
-          FOREIGN KEY (ASG_ID) REFERENCES TB_ASIGNATURAS(ASG_ID) ON DELETE CASCADE
+        CREATE TABLE IF NOT EXISTS TB_SES_LOG (
+          SES_COR VARCHAR(100) NOT NULL UNIQUE,          
+          SES_FLG INTEGER,
+          SES_TIM VARCHAR 
         )
       `, []);
-      console.log('Tabla TB_ASISTENCIA creada con éxito.');
+      console.log('Tabla TB_SES_LOG creada con éxito.');
 
-      console.log('Creando índice IDX_USUARIOS_RUT...');
-      await database.executeSql(`
-        CREATE INDEX IF NOT EXISTS IDX_USUARIOS_RUT ON TB_USUARIOS(USR_RUT)
-      `, []);
-      console.log('Índice IDX_USUARIOS_RUT creado con éxito.');
-
-      console.log('Todas las tablas y el índice fueron creados correctamente.');
+      console.log('Todas las tablas fueron creados correctamente.');
     } catch (error) {
-      console.error('Error al crear tablas o índices:', error);
+      console.error('Error al crear tablas:', error);
     }
   }
+
+
+
+  //consultas 
+  
+  
 }

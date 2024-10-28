@@ -8,11 +8,17 @@
     <ion-list>
       <ion-item [routerLink]="['folder']">Principal</ion-item>
     </ion-list>
+        <ion-list>
+      <ion-item [routerLink]="['mostrar-sede']">Sedes</ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item [routerLink]="['admin-sql']">BDD board</ion-item>
+    </ion-list>
   </ion-content>
   <ion-footer>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 btn_cerr">
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['login']" >Cerrar sesion</a>
+        <a class="nav-link" (click)='goLogin()' >Cerrar sesion</a>
       </li>
     </ul>
   </ion-footer>
