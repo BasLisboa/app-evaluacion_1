@@ -154,7 +154,7 @@ export class RegistroPage implements OnInit {
         const fechaHoraLocal = `${fecha} ${hora}`;
         await db.executeSql(
           `INSERT INTO TB_SES_LOG (SES_COR, SES_FLG, SES_TIM) VALUES (?, ?, ?)`,
-          [this.cli_usr_reg, 0, fechaHoraLocal]
+          [this.cli_usr_reg, 1, fechaHoraLocal]
         );
 
         console.log('Usuario insertado correctamente en TB_USUARIOS. y TB_SES_LOG');

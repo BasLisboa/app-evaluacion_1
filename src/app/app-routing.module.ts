@@ -14,6 +14,7 @@
 //*******************************************************************************/
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { SessionGuard } from './session.guard';
 
 const routes: Routes = [
   {
@@ -22,13 +23,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'inicio',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
-  {
     path: 'folder',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),
+    canActivate: [SessionGuard]
   },
   {
     path: 'login',

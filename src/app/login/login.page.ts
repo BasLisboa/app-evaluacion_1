@@ -24,8 +24,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDataService } from '../shared-data.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ConexionBDService } from '../services/conexion-bd.service';
-import { CreacionDBService } from '../services/creacion-db.service';
 import { ApiServiceService } from '../services/api-service.service';
 import { lastValueFrom } from 'rxjs';
 import { LogSysService } from '../services/log-sys.service';
@@ -53,8 +51,6 @@ export class LoginPage implements OnInit {
     private sharedDataService: SharedDataService,
     public fb: FormBuilder,
     private router: Router,
-    private creacionDBService: CreacionDBService,
-    private conexionBDService: ConexionBDService,
     private apiService: ApiServiceService,
     private logSysService: LogSysService,
     private sesionActivaService:SesionActivaService
@@ -67,8 +63,6 @@ export class LoginPage implements OnInit {
 
   //BAS01-INI
   ngOnInit() {
-    this.creacionDBService.inicializarBD();
-
     this.visibleSpinner = false;
   }
 

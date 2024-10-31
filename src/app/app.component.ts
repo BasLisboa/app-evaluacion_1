@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SesionActivaService } from './services/sesion-activa.service';
+import { CreacionDBService } from '../app/services/creacion-db.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +11,18 @@ import { SesionActivaService } from './services/sesion-activa.service';
 export class AppComponent implements OnInit {
   constructor(
     private sesionActivaService: SesionActivaService,
+    private creacionDBService: CreacionDBService,
     private router: Router
   ) {}
 
   async ngOnInit() {
-    const usuarioActivo = await this.sesionActivaService.verificarSesionActiva();
-    console.log("respuesta usuario activo: ",usuarioActivo);
+    await this.creacionDBService.inicializarBD();
     
+    const usuarioActivo = await this.sesionActivaService.verificarSesionActiva();
     if (usuarioActivo) {
-      this.router.navigate(['folder']);
+      this.router.navigate(['folder']); 
     } else {
-      this.router.navigate(['login']);
+      this.router.navigate(['login']); 
     }
   }
 }

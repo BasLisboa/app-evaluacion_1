@@ -60,16 +60,15 @@ export class MenuPrincipalComponent  implements OnInit {
 
   //NUEVA LOGICA
   async traeUsuario(){
-    const usuarioActivo = await this.sesionActivaService.verificarSesionActiva();
-    if(usuarioActivo){
-      this.usuarioNombre = usuarioActivo;
+    const usuarioLogueado = this.sharedDataService.getUsuarioLogueado();
+    if(usuarioLogueado){
+      this.usuarioNombre = usuarioLogueado;
     }
   }
 
   goLogin(){
-    const usuarioLogueado = this.sharedDataService.getUsuarioLogueado();
     this.menuCtrl.close('main-content');
-    this.sesionActivaService.updateFlag(0,usuarioLogueado);
+    this.sesionActivaService.updateFlag(0,this.usuarioNombre);
     this.router.navigate(['login']); 
   }
 
