@@ -2,7 +2,7 @@
 //*                                   SecGar                                    */
 //*******************************************************************************/
 //* Proyecto: Cambio psw movil                                                  */
-//* Desarrollador: Bastian Lisboa && Daniel Galvez                              */
+//* Desarrollador: Bastian Lisboa                  yyyy                             */
 //* Fecha: 03-09-2024                                                           */
 //*******************************************************************************/
 //* MODIFICACIONES                                                              */
@@ -14,6 +14,7 @@
 //*******************************************************************************/
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { SessionGuard } from './session.guard';
 
 const routes: Routes = [
   {
@@ -22,13 +23,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'inicio',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
-  {
     path: 'folder',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),
+    canActivate: [SessionGuard]
   },
   {
     path: 'login',
@@ -41,7 +38,17 @@ const routes: Routes = [
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'admin-sql',
+    loadChildren: () => import('./admin-sql/admin-sql.module').then( m => m.AdminSqlPageModule)
+  },
+  {
+    path: 'mostrar-sede',
+    loadChildren: () => import('./mostrar-sede/mostrar-sede.module').then( m => m.MostrarSedePageModule)
   }
+
+
 ];
 
 

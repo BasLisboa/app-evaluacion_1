@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>mostrarSede</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Informacion sedes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid *ngIf="listaSede.length > 0">
+    <ion-row>
+      <ion-col><strong>Nombre</strong></ion-col>
+      <ion-col><strong>Dirección</strong></ion-col>
+      <ion-col><strong>Teléfono</strong></ion-col>
+      <ion-col><strong>Horario</strong></ion-col>
+      <ion-col><strong>Imagen</strong></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let sede of listaSede">
+      <ion-col>{{ sede.nombre }}</ion-col>
+      <ion-col>{{ sede.direccion }}</ion-col>
+      <ion-col>{{ sede.telefono }}</ion-col>
+      <ion-col>{{ sede.horarioAtencion }}</ion-col>
+      <ion-col>
+        <img [src]="sede.imagen" alt="{{ sede.nombre }}" width="100">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

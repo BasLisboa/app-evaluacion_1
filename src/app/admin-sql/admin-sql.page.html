@@ -1,0 +1,42 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>adminSql</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Control data</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card-header>
+    <ion-row>
+      <ion-col>
+          <h1 style="text-align: center;"><strong>Admin SQL</strong></h1>
+      </ion-col>
+  </ion-row>
+  </ion-card-header>
+  <ion-card-content>
+    <form>
+      <ion-item>
+        <ion-label position="stacked">Consulta SQL</ion-label>
+        <ion-textarea [(ngModel)]="sqlQuery" placeholder="Escribe tu consulta aquí..."></ion-textarea>    
+      </ion-item>
+      
+      <ion-button expand="full" (click)="ejecutarQuery()">Ejecutar Consulta</ion-button>    
+    </form>
+  </ion-card-content>
+<br/>
+<br/>
+<ion-grid *ngIf="resultados.length > 0">
+  <ion-row>
+    <ion-col *ngFor="let header of headers"><strong>{{ header }}</strong></ion-col>
+  </ion-row>
+  <ion-row *ngFor="let resultado of resultados">
+    <ion-col *ngFor="let key of headers">{{ resultado[key] }}</ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
