@@ -18,10 +18,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { SharedDataService } from 'src/app/shared-data.service';
 import { SesionActivaService } from '../services/sesion-activa.service';
-
-
+import { ConexionBDService } from '../services/conexion-bd.service';
 
 @Component({
   selector: 'app-menu-principal',
@@ -30,17 +28,17 @@ import { SesionActivaService } from '../services/sesion-activa.service';
 })
 export class MenuPrincipalComponent  implements OnInit {
 
-  usuarioNombre: string = ''; 
+  usuario = ''; 
 
   constructor(
-    private sharedDataService: SharedDataService,
+    private conexionBDService: ConexionBDService,
     private router: Router,
     private menuCtrl: MenuController,
     private sesionActivaService: SesionActivaService
   ) { }
 
   ngOnInit() {
-    this.traeUsuario();
+    this.traeUsuario()
   }
 
   //BAS01-INI
@@ -59,16 +57,42 @@ export class MenuPrincipalComponent  implements OnInit {
 
 
   //NUEVA LOGICA
-  async traeUsuario(){
-    const usuarioLogueado = this.sharedDataService.getUsuarioLogueado();
-    if(usuarioLogueado){
-      this.usuarioNombre = usuarioLogueado;
+
+  async traeUsuario(): Promise<string> {
+    const db = this.conexionBDService.getDB();
+    if (!db) {
+      console.error("Base de datos no disponible.");
+      return "error";
+    }
+  
+    try {
+      const resultado = await db.executeSql(`SELECT SES_COR FROM TB_SES_LOG WHERE SES_FLG = 1`, []);
+      if (resultado.rows.length > 0 ) {
+        const sesionUsuario = resultado.rows.item(0);
+        console.log("Usuario activo encontrado:", sesionUsuario.SES_COR);
+        
+        const usuario = sesionUsuario.SES_COR.toString();
+
+        this.usuario = usuario.toString();
+
+        console.log(this.usuario);
+        
+        return this.usuario.toString();
+        
+      } else {
+        console.log("No hay sesión activa con SES_FLG = 1 en TB_SES_LOG.");
+        return "error";
+      }
+    } catch (error: any) {
+      console.error("Error al verificar la sesión activa:", error.message || error);
+      return "error";
     }
   }
 
   goLogin(){
     this.menuCtrl.close('main-content');
-    this.sesionActivaService.updateFlag(0,this.usuarioNombre);
+    this.traeUsuario();
+    this.sesionActivaService.updateFlag(0,this.usuario);
     this.router.navigate(['login']); 
   }
 

@@ -28,6 +28,7 @@ import { ApiServiceService } from '../services/api-service.service';
 import { lastValueFrom } from 'rxjs';
 import { LogSysService } from '../services/log-sys.service';
 import { SesionActivaService } from '../services/sesion-activa.service';
+import { SessionGuard } from '../session.guard';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +54,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private apiService: ApiServiceService,
     private logSysService: LogSysService,
-    private sesionActivaService:SesionActivaService
+    private sesionActivaService:SesionActivaService,
+    private sessionGuard: SessionGuard
   ) {
     this.formularioLogin = this.fb.group({
       'nombre': new FormControl("", Validators.required),
@@ -64,6 +66,7 @@ export class LoginPage implements OnInit {
   //BAS01-INI
   ngOnInit() {
     this.visibleSpinner = false;
+    this.sharedDataService.setUsuarioLogueado(this.cli_usr);
   }
 
 
@@ -92,7 +95,6 @@ export class LoginPage implements OnInit {
           this.sesionActivaService.updateFlag(1,correoLogin);
           this.sharedDataService.setUsuarioLogueado(this.cli_usr);
           this.mostrarSpinner();
-
           this.router.navigate(['folder']);
         } else {
           console.log('Error al loguear: ', json.message, 'status: ', json.status);

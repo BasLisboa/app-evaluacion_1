@@ -27,8 +27,10 @@ export class SharedDataService {
   //SE CAMBIAN DE STRING[] A STRING ESTAS 3 VARIABLES.
 
   private usuarioLogueado: string = ''; 
+  usuario: string = '';
 
-  constructor() {}
+  constructor(
+  ) {}
 
   setUsuarioLogueado(usuario: string): void {
     this.usuarioLogueado = usuario;
@@ -37,6 +39,9 @@ export class SharedDataService {
   getUsuarioLogueado(): string {
     return this.usuarioLogueado;
   }
+
+
+ 
 
   
   //SE COMENTA CODIGO NO UTILIZADO

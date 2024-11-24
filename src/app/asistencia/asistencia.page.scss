@@ -1,0 +1,22 @@
+
+.card_ass{
+    margin: 8%;
+    background-color: rgb(77, 77, 223);
+    color: white;
+}
+
+.card_ass_red{
+    background-color: rgb(241, 87, 87);
+    margin: 8%;
+    color: white;
+}
+
+ion-content {
+    --background: linear-gradient(to right, #ffffff, #dbdada); /* De gris claro a gris oscuro */
+}
+
+
+:root {
+    --ion-color-primary: #0000FF; /* Azul */
+    --ion-color-primary-contrast: #FFFFFF; /* Blanco para el texto */
+  }

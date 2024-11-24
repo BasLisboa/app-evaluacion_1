@@ -63,6 +63,23 @@ export class ApiServiceService {
 
     return this.http.patch(this.ruta_api + '/api_duoc/usuario/usuario_modificar', cambio_clv);
   }
+
+  marcarAsistencia(sigla: string, correo: string, fecha: string) {
+    let marcar_asi: any = {};
+
+    marcar_asi.sigla = sigla;
+    marcar_asi.correo = correo;
+    marcar_asi.fecha = fecha;
+    
+    return this.http.post(this.ruta_api + '/api_duoc/usuario/marcar_asistencia', marcar_asi);
+  }
+
+  obtenerAsistencia(correo: string){
+    return this.http.get(this.ruta_api + '/api_duoc/usuario/asistencia_obtener?correo=' + correo).pipe();
+  }
+
+  
+
 }
 
 

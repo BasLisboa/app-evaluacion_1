@@ -1,6 +1,7 @@
 .titulo-alineado {
     display: inline-flex;
     align-items: center; 
+    color: white;
   }
   
   .imagusu {
@@ -12,7 +13,7 @@
   ion-footer{
 
     color: rgb(0, 0, 0);
-    background-color: white;
+    background-color: #0000FF;
     padding: 0%;
     margin: 0%;
   }
@@ -20,4 +21,11 @@
 
 .btn_cerr{
   margin: 5%;
+  color: white;
+}
+
+
+:root {
+  --ion-color-primary: #0000FF; /* Azul */
+  --ion-color-primary-contrast: #FFFFFF; /* Blanco para el texto */
 }

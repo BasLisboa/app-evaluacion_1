@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { SesionActivaService } from './services/sesion-activa.service';
-import { CreacionDBService } from '../app/services/creacion-db.service';
-import { Router } from '@angular/router';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { SessionGuard } from '../app/session.guard';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-root',
@@ -10,19 +12,10 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private sesionActivaService: SesionActivaService,
-    private creacionDBService: CreacionDBService,
-    private router: Router
+    private sessionGuard: SessionGuard,
   ) {}
 
   async ngOnInit() {
-    await this.creacionDBService.inicializarBD();
-    
-    const usuarioActivo = await this.sesionActivaService.verificarSesionActiva();
-    if (usuarioActivo) {
-      this.router.navigate(['folder']); 
-    } else {
-      this.router.navigate(['login']); 
-    }
+    this.sessionGuard.canActivate();
   }
 }

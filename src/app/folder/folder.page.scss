@@ -1,38 +1,31 @@
-
---ion-menu::part(backdrop) {
-  --background-color: rgba(255, 255, 255, 0.5);
-}
-
---ion-menu::part(container) {
-  --border-radius: 0 20px 20px 0;
-
-  --box-shadow: 4px 0px 16px rgba(255, 0, 255, 0.18);
-}
-
-
 .card-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 70vh; 
+  margin: 5%;
 }
 
 .card {
   width: 28rem;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   color: white;
 }
 
 body{
-  background-color: black;
+  background-color: rgb(255, 255, 255);
 }
 
-.botonn{
-  background-color: white;
-  color: black;
+.board{
+  background: blue !important;
+  color: white
 }
 
-li{ 
-  padding: 2%;
-  margin: 1%;
+.boton_asistencia{
+  background-color: rgb(51, 51, 247);
+}
+
+:root {
+  --ion-color-primary: #0000FF; /* Azul */
+  --ion-color-primary-contrast: #FFFFFF; /* Blanco para el texto */
 }

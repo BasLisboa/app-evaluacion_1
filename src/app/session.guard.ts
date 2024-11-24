@@ -12,23 +12,28 @@
 //* Descripcion: Creacion de servicio                                           */
 //*******************************************************************************/
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SesionActivaService } from '../app/services/sesion-activa.service';
+import { CreacionDBService } from '../app/services/creacion-db.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SessionGuard implements CanActivate {
+export class SessionGuard{
 
   constructor(
     private sesionActivaService: SesionActivaService,
-    private router: Router
+    private router: Router,
+    private creacionDBService: CreacionDBService
   ) {}
 
   async canActivate(): Promise<boolean> {
+    await this.creacionDBService.inicializarBD();
     const usuarioActivo = await this.sesionActivaService.verificarSesionActiva();
+    console.log(usuarioActivo);
     
-    if (usuarioActivo) {
+    if (usuarioActivo == true) {
+      this.router.navigate(['folder']);
       return true; 
     } else {
       this.router.navigate(['login']); 

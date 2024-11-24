@@ -45,8 +45,8 @@ export class SesionActivaService {
           
           await db.executeSql(`INSERT INTO TB_SES_LOG (SES_COR, SES_FLG, SES_TIM) VALUES (?, ?, ?)`, [usuario, 1, fechaHoraLocal]);
 
-          console.log('Flag cambiada a 1 correctamente');
-          this.logSysService.insertar_log(usuario, ": Flag cambiada a 1 correctamente ", "OK");
+          console.log('Flag insertada');
+          this.logSysService.insertar_log(usuario, ": Flag insertada ", "OK");
         }catch(error){
           console.error('Error al actualizar el flag:', JSON.stringify(error));
         }
@@ -85,7 +85,7 @@ export class SesionActivaService {
   
     try {
       const resultado = await db.executeSql(`SELECT SES_COR, SES_TIM FROM TB_SES_LOG WHERE SES_FLG = 1`, []);
-      if (resultado.rows.length > 0) {
+      if (resultado.rows.length > 0 ) {
         const sesionUsuario = resultado.rows.item(0);
         console.log("Usuario activo encontrado:", sesionUsuario.SES_COR);
         return true; 

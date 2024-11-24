@@ -14,18 +14,17 @@
 //*******************************************************************************/
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { SessionGuard } from './session.guard';
+
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'folder',
     pathMatch: 'full'
   },
   {
     path: 'folder',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),
-    canActivate: [SessionGuard]
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'login',
@@ -46,6 +45,9 @@ const routes: Routes = [
   {
     path: 'mostrar-sede',
     loadChildren: () => import('./mostrar-sede/mostrar-sede.module').then( m => m.MostrarSedePageModule)
+  },  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   }
 
 

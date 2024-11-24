@@ -1,0 +1,56 @@
+.custom-cards {
+    --ion-background-color: #ffffff;
+  }
+  
+  /* Estilo general de las cartas */
+  .sede-card {
+    background-color: #e6f2ff; /* Azul claro */
+    border: 1px solid #d9e6f2;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    overflow: hidden;
+  }
+  
+  /* Encabezado con la imagen */
+  .card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0033cc; /* Azul intenso */
+    padding: 10px;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    max-height: 150px; /* Control de altura */
+    object-fit: cover; /* Recorte de la imagen */
+  }
+  
+  /* Contenido de las cartas */
+  .card-content {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.2em;
+    color: #0033cc; /* Azul intenso */
+    margin-bottom: 10px;
+  }
+  
+  .card-content p {
+    font-size: 0.9em;
+    color: #000000;
+    margin: 5px 0;
+  }
+  
+  @media (min-width: 768px) {
+    /* Ajuste para pantallas más grandes */
+    .sede-card {
+      max-width: 400px;
+      margin: 15px auto;
+    }
+  }
+  

@@ -1,0 +1,61 @@
+<!--//*******************************************************************************/
+    //*                                   duoc                                      */
+    //*******************************************************************************/
+    //* Proyecto: Login WEB movil                                                   */
+    //* Desarrollador: Bastian Lisboa (BAS)                                         */
+    //* Fecha: 13-11-2024                                                           */
+    //*******************************************************************************/
+    //* MODIFICACIONES                                                              */
+    //*******************************************************************************/
+    //* Desarrollador: Bastian Lisboa                                               */
+    //* Fecha: 13-11-2024                                                           */
+    //* Descripcion: Creacion de WEB                                                */
+    //*-----------------------------------------------------------------------------*/
+    //*******************************************************************************/-->
+
+<div id="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Asistencia</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</div> 
+
+<ion-content [fullscreen]="true">
+  <!--CARDS ASISTENCIA-->  
+  <div *ngIf="listaAsistencia.length > 0">
+    <div *ngFor="let asistencia of listaAsistencia">
+      <div class="row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card" [ngClass]="{'card_ass': asistencia.porcentajeFlag, 'card_ass_red': !asistencia.porcentajeFlag}">
+            <div class="card-body">
+              <h5 class="card-title">{{ asistencia.nombre_curso }}</h5>
+              <p>Seccion: {{ asistencia.sigla }}</p>
+              <p class="card-text">Asistencia: <strong>{{ asistencia.porcentaje | number:'1.2-2' }}%</strong></p>
+              <p>Presente: {{ asistencia.presente }}</p>
+              <p>Ausente: {{ asistencia.ausente }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--QR-->
+  <ion-list>
+    <ion-item *ngFor="let barcode of barcodes">
+    <ion-label position="stacked">{{ barcode.format }}</ion-label>
+    <ion-input type="text" [value]="barcode.rawValue"></ion-input>
+  </ion-item>
+
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scan()" [disabled]="!isSupported">
+    <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

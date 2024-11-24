@@ -1,14 +1,19 @@
 <ion-menu contentId="main-content">
   <ion-header>
-    <ion-toolbar color="light">
-      <ion-title class="titulo-alineado"><ion-icon name="person-circle-outline" class="imagusu"></ion-icon>{{ usuarioNombre }}</ion-title>
+    <ion-toolbar color="primary">
+      <ion-title class="titulo-alineado"><ion-icon name="person-circle-outline" class="imagusu"></ion-icon>{{usuario}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list>
       <ion-item [routerLink]="['folder']">Principal</ion-item>
     </ion-list>
-        <ion-list>
+    <ion-list>
+      <ion-item [routerLink]="['asistencia']">Asistencia
+        
+      </ion-item>
+    </ion-list>
+    <ion-list>
       <ion-item [routerLink]="['mostrar-sede']">Sedes</ion-item>
     </ion-list>
     <ion-list>
